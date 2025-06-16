@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:runningfeet/pages/home_screen.dart';
 
 void main() => runApp(const MyApp());
 
@@ -10,7 +11,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner:
           false, // Menghilangkan banner debug di pojok kanan atas
-      home: Firstpage(), // Menetapkan Firstpage sebagai halaman awal
+      // home: Firstpage(), // Menetapkan Firstpage sebagai halaman awal
+      home: HomeScreen(), // Menetapkan Firstpage sebagai halaman awal
     );
   }
 }
