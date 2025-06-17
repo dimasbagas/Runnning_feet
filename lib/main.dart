@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:runningfeet/pages/button_navigation.dart';
+import 'package:runningfeet/pages/home_screen.dart';
+// import 'package:runningfeet/pages/button_navigation.dart';
 // import 'package:runningfeet/pages/home_screen.dart';
 
 void main() => runApp(const MyApp());
@@ -12,8 +13,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner:
           false, // Menghilangkan banner debug di pojok kanan atas
-      // home: Firstpage(), // Menetapkan Firstpage sebagai halaman awal
-      home: ButtonNavigation(), // Menetapkan Firstpage sebagai halaman awal
+      home: Firstpage(), // Menetapkan Firstpage sebagai halaman awal
+      // home: ButtonNavigation(), // Menetapkan Firstpage sebagai halaman awal
     );
   }
 }
@@ -55,21 +56,27 @@ class _FirstpageState extends State<Firstpage> {
                   ),
                 ),
                 const SizedBox(height: 60),
-                ElevatedButton(onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFE7F20),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomeScreen()),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFFFE7F20),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 60, vertical: 10),
                   ),
-                  padding: EdgeInsets.symmetric(horizontal: 60, vertical: 10),
-                ),
-                child: Text(
-                  "Get Started",
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xffffffff)
-                  ),
+                  child: Text(
+                    "Get Started",
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xffffffff),
+                    ),
                   ),
                 ),
               ],
