@@ -17,7 +17,6 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: EdgeInsets.all(8.0),
           child: Column(
             children: [
-
               // kondisi cuaca hari ini
               Card(
                 child: Padding(
@@ -32,55 +31,42 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Text(
-                        "Suhu: °C'",
-                        style: TextStyle(
-                          fontSize: 16,
-                        ),
-                      ),
-                      Text(
-                        'Kondisi: ',
-                        style: TextStyle(
-                          fontSize: 16,
-                        ),
-                      ),
+                      Text("Suhu: °C'", style: TextStyle(fontSize: 16)),
+                      Text('Kondisi: ', style: TextStyle(fontSize: 16)),
                     ],
                   ),
                 ),
               ),
 
               // card riwayat lari
-            SizedBox(height: 10),
-            Text(
-              "Riwayat Lari",
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            const Divider(),
-            Card(
-              margin: const EdgeInsets.symmetric(vertical: 6.0),
-              child: ListTile(
-                leading: const Icon(
-                  Icons.run_circle_outlined,
-                  color: Colors.blue,
-                  size: 40,
-                ),
-                title: Text("Lari lari id"),
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Mulai"
-                    ),
-                    Text("Selesai"),
-                    Text("durasi text"),
-                  ],
-                ),
-                trailing: const Icon(Icons.arrow_forward_ios),
-                isThreeLine: true,
-
-                onTap: () {},
+              SizedBox(height: 10),
+              Text(
+                "Riwayat Lari",
+                style: Theme.of(context).textTheme.titleLarge,
               ),
-            )
+              const Divider(),
+              Card(
+                margin: const EdgeInsets.symmetric(vertical: 6.0),
+                child: ListTile(
+                  leading: const Icon(
+                    Icons.run_circle_outlined,
+                    color: Colors.blue,
+                    size: 40,
+                  ),
+                  title: Text("Lari lari id"),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Mulai"),
+                      Text("Selesai"),
+                      Text("durasi text"),
+                    ],
+                  ),
+                  trailing: const Icon(Icons.arrow_forward_ios),
+                  isThreeLine: true,
+                  onTap: () {},
+                ),
+              ),
             ],
           ),
         ),
