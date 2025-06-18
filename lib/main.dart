@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:runningfeet/pages/hisroty.dart';
+import 'package:runningfeet/pages/running.dart';
 
 void main() => runApp(const MyApp());
 
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner:
           false, // Menghilangkan banner debug di pojok kanan atas
-      home: Firstpage(), // Menetapkan Firstpage sebagai halaman awal
+      home: Running(), // Menetapkan Firstpage sebagai halaman awal
     );
   }
 }
