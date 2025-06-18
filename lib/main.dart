@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:runningfeet/pages/home_screen.dart';
-// import 'package:runningfeet/pages/button_navigation.dart';
-// import 'package:runningfeet/pages/home_screen.dart';
+import 'package:runningfeet/pages/hisroty.dart';
 
 void main() => runApp(const MyApp());
 
@@ -14,7 +12,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner:
           false, // Menghilangkan banner debug di pojok kanan atas
       home: Firstpage(), // Menetapkan Firstpage sebagai halaman awal
-      // home: ButtonNavigation(), // Menetapkan Firstpage sebagai halaman awal
     );
   }
 }
@@ -60,7 +57,7 @@ class _FirstpageState extends State<Firstpage> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => HomeScreen()),
+                      MaterialPageRoute(builder: (context) => History()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
