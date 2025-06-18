@@ -35,6 +35,21 @@ class _RunningState extends State<Running> {
                 onPressed: () {},
                 child: Text("mulai"),
               ),
+              SizedBox(height: 30),
+              Text("Riwayat Titik Lokasi",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+              Divider(),
+              Card(
+                elevation: 2,
+                margin: EdgeInsets.symmetric(vertical: 4),
+                child: ListTile(
+                  leading: CircleAvatar(
+                    child: Text("index"),
+                  ),
+                  title: Text("lat:"),
+                  subtitle: Text("Lot:"),
+                ),
+              )
             ],
           ),
         ),
