@@ -1,5 +1,9 @@
 
 
+import 'dart:io';
+
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseInstance {
@@ -29,4 +33,19 @@ class DatabaseInstance {
   static const String colWaktu = 'waktu';
   static const String colLatitude = 'latitude';
   static const String colLongitude = 'longitude';
+
+
+  Future<Database> _initDatabase() async {
+    Directory documentsDirectory = await getApplicationDocumentsDirectory();
+    String path - join(documentsDirectory.path, _databaseName);
+    return await openDatabase(
+      path,
+      version: _databaseVersion,
+      onCreate: _onCreate,
+      onUpgrade: _onUpgrade,
+      onConfigure: (db) async {
+        await db.execute('PRAGMA foreign_keys = on');
+      },
+    );
+  }
 }
