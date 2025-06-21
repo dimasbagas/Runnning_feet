@@ -27,8 +27,8 @@ class _ApiState extends State<Api> {
       if (response.statusCode == 200) {
         return json.decode(response.body);
       } else {
-        throw Exception('
-        Gagal memuat status cuaca. Status code: ${response.statusCode}'
+        throw Exception(
+          'Gagal memuat status cuaca. Status code: ${response.statusCode}'
         );
       }
     } catch (e) {
