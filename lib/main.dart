@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:runningfeet/pages/hisroty.dart';
-import 'package:runningfeet/pages/maps.dart';
-import 'package:runningfeet/pages/running.dart';
+// import 'package:runningfeet/pages/maps.dart';
+// import 'package:runningfeet/pages/running.dart';
 
 void main() => runApp(const MyApp());
 
@@ -11,8 +11,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner:
-          false, // Menghilangkan banner debug di pojok kanan atas
-      home: Firstpage(), // Menetapkan Firstpage sebagai halaman awal
+          false, 
+      home: Firstpage(),
     );
   }
 }

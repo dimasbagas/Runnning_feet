@@ -14,7 +14,8 @@ class _HistoryState extends State<History> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Running Tracking")),
+      appBar: AppBar(title: Text("Running Tracking"),
+      centerTitle: true),
       backgroundColor: mainSage,
       body: SafeArea(
         child: Container(
@@ -28,14 +29,14 @@ class _HistoryState extends State<History> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(
                       15,
-                    ), // Melengkungkan sudut Card
+                    ),
                   ),
                   child: Container(
                     decoration: BoxDecoration(
                       color: mainOrange,
                       borderRadius: BorderRadius.circular(
                         15,
-                      ), // Pastikan tetap ada
+                      ), 
                     ),
                     child: Padding(
                       padding: EdgeInsets.all(16.0),
@@ -96,9 +97,7 @@ class _HistoryState extends State<History> {
         ),
       ),
       bottomNavigationBar: ButtonNavigation(
-        onTap: () {
-          // Tambahkan aksi sesuai kebutuhan, misalnya navigasi
-        },
+        onTap: () {},
       ),
     );
   }

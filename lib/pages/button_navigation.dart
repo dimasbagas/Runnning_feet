@@ -5,12 +5,24 @@ import 'package:runningfeet/pages/running.dart';
 
 class ButtonNavigation extends StatelessWidget {
   final void Function()? onTap;
-  const ButtonNavigation({super.key, this.onTap});
+  final void Function()? onHistoryTap;
+  final void Function()? onLocationTap;
+
+  const ButtonNavigation({
+    super.key,
+    this.onTap,
+    this.onHistoryTap,
+    this.onLocationTap,
+  });
 
   final Color mainOrange = const Color(0xFFff7f27);
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final navigationWidth = screenWidth * 0.9;
+    const double fabSize = 70.0;
+
     return Container(
       decoration: BoxDecoration(
         color: mainOrange,
@@ -22,48 +34,50 @@ class ButtonNavigation extends StatelessWidget {
         ),
         boxShadow: [BoxShadow(color: Colors.black, blurRadius: 10)],
       ),
-      height: 70,
+      height: 70, 
+      width: navigationWidth,
+
       child: Stack(
-        clipBehavior: Clip.none,
+        clipBehavior: Clip.none, 
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              // Tombol kiri
-              IconButton(
-                icon: const Icon(Icons.history, size: 30, color: Colors.white),
-                onPressed: () {
-                  // navigasi ke riwayat
-                  Navigator.push(context, 
-                  MaterialPageRoute(builder: (context) => History()));
-                },
-                tooltip: 'Location',
-              ),
-              const SizedBox(width: 0),
-              // Tombol kanan
-              IconButton(
-                icon: const Icon(Icons.location_on, size: 30, color: Colors.white),
-                onPressed: () {
-                  // navigasi  ke lokasi atau lainnya
-                  Navigator.push(context, 
-                  MaterialPageRoute(builder: (context) => Maps()));
-                },
-                tooltip: 'History',
-              ),
-            ],
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 50.0)
+            .copyWith(top: 10.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center, 
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.history, size: 30, color: Colors.white),
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => History()),
+                    );
+                  },
+                  tooltip: 'History',
+                ),
+                IconButton(
+                  icon: const Icon(Icons.location_on, size: 30, color: Colors.white),
+                  onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Maps()),
+                    );
+                  },
+                  tooltip: 'Location',
+                ),
+              ],
+            ),
           ),
-          // Tombol tengah (floating button)
+
           Positioned(
-            top: -35,
-            left: MediaQuery.of(context).size.width / 2 - 35,
+            top: -35, // Posisi default FAB
+            left: (navigationWidth / 2) - (fabSize / 03),
             child: GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Running()));
-              }, 
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Running()),
+                );
+              },
               child: Container(
-                height: 70,
-                width: 70,
+                height: fabSize,
+                width: fabSize,
                 decoration: BoxDecoration(
                   color: mainOrange,
                   shape: BoxShape.circle,
