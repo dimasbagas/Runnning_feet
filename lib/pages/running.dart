@@ -15,9 +15,8 @@ class _RunningState extends State<Running> {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsetsGeometry.all(16.0),
-          // CrossAxisAlignment: CrossAxisAlignment.stretch,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
