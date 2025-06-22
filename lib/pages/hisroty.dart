@@ -54,6 +54,18 @@ class _HistoryState extends State<History> {
     }
   }
 
+    void _deleteLari(int? id) async {
+    if (id != null) {
+      await _databaseInstance.deleteLari(id);
+      setState(() {
+        _lariData = _databaseInstance.getAllLari(); // Refresh daftar
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Catatan lari berhasil dihapus!')),
+      );
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -209,7 +221,7 @@ class _HistoryState extends State<History> {
                                 ),
                                 trailing: IconButton(
                                   icon: const Icon(Icons.delete, color: Colors.white),
-                                  onPressed: () => (lari.id), 
+                                  onPressed: () => _deleteLari (lari.id), 
                                   // _deleteLari
                                 ),
                                 onTap: () {
