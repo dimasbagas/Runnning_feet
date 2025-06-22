@@ -68,8 +68,8 @@ class ButtonNavigation extends StatelessWidget {
           ),
 
           Positioned(
-            top: -35, // Posisi default FAB
-            left: (navigationWidth / 2) - (fabSize / 03),
+            top: -35, 
+            left: (navigationWidth / 2) - (fabSize / 04),
             child: GestureDetector(
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => Running()),
