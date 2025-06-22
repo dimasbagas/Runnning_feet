@@ -27,10 +27,10 @@ class ButtonNavigation extends StatelessWidget {
       decoration: BoxDecoration(
         color: mainOrange,
         borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(40),
-          bottomLeft: Radius.circular(40),
-          topRight: Radius.circular(40),
-          bottomRight: Radius.circular(40),
+          // topLeft: Radius.circular(40),
+          // bottomLeft: Radius.circular(40),
+          // topRight: Radius.circular(40),
+          // bottomRight: Radius.circular(40),
         ),
         boxShadow: [BoxShadow(color: Colors.black, blurRadius: 10)],
       ),
