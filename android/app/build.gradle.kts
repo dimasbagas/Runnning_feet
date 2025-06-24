@@ -8,7 +8,9 @@ plugins {
 android {
     namespace = "com.example.runningfeet"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+
+    // Tambahkan ndkVersion di sini, di dalam blok android
+    ndkVersion = "27.0.12077973"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
