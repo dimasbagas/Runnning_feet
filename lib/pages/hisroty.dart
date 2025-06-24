@@ -74,10 +74,13 @@ class _HistoryState extends State<History> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Running Tracking"),
+        titleTextStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
         centerTitle: true,
-        backgroundColor: mainOrange,
+        backgroundColor: mainSage,
       ),
-      backgroundColor: mainSage,
       body: SafeArea(
         child: Container(
           color: mainSage,
