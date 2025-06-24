@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:runningfeet/database/database_instance.dart';
-import 'package:runningfeet/models/lari_model.dart'; 
+import 'package:runningfeet/models/lari_model.dart';
 import 'package:runningfeet/pages/button_navigation.dart';
 
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:intl/intl.dart';
+import 'package:runningfeet/pages/maps.dart';
 
 class History extends StatefulWidget {
   const History({super.key});
@@ -50,22 +51,23 @@ class _HistoryState extends State<History> {
         );
       }
     } catch (e) {
-      return Future.error('Tidak ada koneksi internet atau server bermasalah: $e');
+      return Future.error(
+        'Tidak ada koneksi internet atau server bermasalah: $e',
+      );
     }
   }
 
-    void _deleteLari(int? id) async {
+  void _deleteLari(int? id) async {
     if (id != null) {
       await _databaseInstance.deleteLari(id);
       setState(() {
-        _lariData = _databaseInstance.getAllLari(); // Refresh daftar
+        _lariData = _databaseInstance.getAllLari();
       });
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Catatan lari berhasil dihapus!')),
       );
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +85,6 @@ class _HistoryState extends State<History> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                // Kondisi cuaca hari ini
                 FutureBuilder<Map<String, dynamic>>(
                   future: _weatherData,
                   builder: (context, snapshot) {
@@ -135,12 +136,18 @@ class _HistoryState extends State<History> {
                                 const SizedBox(height: 4),
                                 Text(
                                   "Suhu: ${temperature.toStringAsFixed(1)} °C",
-                                  style: const TextStyle(fontSize: 16, color: Colors.white),
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                  ),
                                 ),
                                 const SizedBox(height: 4),
                                 Text(
                                   "Kondisi: ${description[0].toUpperCase()}${description.substring(1)}",
-                                  style: const TextStyle(fontSize: 16, color: Colors.white),
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ],
                             ),
@@ -148,20 +155,21 @@ class _HistoryState extends State<History> {
                         ),
                       );
                     } else {
-                      return const Center(child: Text('Tidak ada data cuaca yang tersedia'));
+                      return const Center(
+                        child: Text('Tidak ada data cuaca yang tersedia'),
+                      );
                     }
                   },
                 ),
-                // Card riwayat lari
                 const SizedBox(height: 10),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     "Riwayat Lari",
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 const Divider(color: Colors.white70),
@@ -172,8 +180,14 @@ class _HistoryState extends State<History> {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const Center(child: CircularProgressIndicator());
                       } else if (snapshot.hasError) {
-                        return Center(child: Text("Error: ${snapshot.error}", style: const TextStyle(color: Colors.redAccent)));
-                      } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+                        return Center(
+                          child: Text(
+                            "Error: ${snapshot.error}",
+                            style: const TextStyle(color: Colors.redAccent),
+                          ),
+                        );
+                      } else if (snapshot.hasData &&
+                          snapshot.data!.isNotEmpty) {
                         final lariList = snapshot.data!;
                         return ListView.builder(
                           itemCount: lariList.length,
@@ -182,7 +196,9 @@ class _HistoryState extends State<History> {
 
                             String durasiText = "Lari belum selesai";
                             if (lari.selesai != null) {
-                              final durasi = lari.selesai!.difference(lari.mulai);
+                              final durasi = lari.selesai!.difference(
+                                lari.mulai,
+                              );
                               durasiText =
                                   "Durasi: ${durasi.inHours} jam ${durasi.inMinutes.remainder(60)} menit ${durasi.inSeconds.remainder(60)} detik";
                             }
@@ -209,24 +225,40 @@ class _HistoryState extends State<History> {
                                   children: [
                                     Text(
                                       "Mulai: ${DateFormat('dd MMMM HH:mm').format(lari.mulai)}",
-                                      style: const TextStyle(color: Colors.white70),
+                                      style: const TextStyle(
+                                        color: Colors.white70,
+                                      ),
                                     ),
                                     if (lari.selesai != null)
                                       Text(
                                         "Selesai : ${DateFormat('dd MMMM HH:mm').format(lari.selesai!)}",
-                                        style: const TextStyle(color: Colors.white70),
+                                        style: const TextStyle(
+                                          color: Colors.white70,
+                                        ),
                                       ),
-                                    Text(durasiText, style: const TextStyle(color: Colors.white70)),
+                                    Text(
+                                      durasiText,
+                                      style: const TextStyle(
+                                        color: Colors.white70,
+                                      ),
+                                    ),
                                   ],
                                 ),
                                 trailing: IconButton(
-                                  icon: const Icon(Icons.delete, color: Colors.white),
-                                  onPressed: () => _deleteLari (lari.id), 
-                                  // _deleteLari
+                                  icon: const Icon(
+                                    Icons.delete,
+                                    color: Colors.white,
+                                  ),
+                                  onPressed: () => _deleteLari(lari.id),
                                 ),
                                 onTap: () {
-                                  // Secara opsional, navigasi ke halaman detail untuk lari tersebut
-                                  // Navigator.push(context, MaterialPageRoute(builder: (context) => RunDetailPage(lari: lari)));
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          Maps(lariId: lari.id!),
+                                    ),
+                                  );
                                 },
                               ),
                             );
@@ -248,12 +280,15 @@ class _HistoryState extends State<History> {
           ),
         ),
       ),
-      // bottomNavigationBar: ButtonNavigation(onTap: () {}), // Tetap ini atau hapus parameter onTap jika tidak wajib
-      // Anda perlu menginisialisasi ButtonNavigation dengan parameter yang sesuai.
-      // Jika onTap tidak wajib, Anda bisa gunakan:
-      bottomNavigationBar: ButtonNavigation(), // Asumsi ButtonNavigation tidak memerlukan onTap jika tidak ada aksi
-      // Jika onTap wajib tapi tidak ada aksi, gunakan:
-      // bottomNavigationBar: ButtonNavigation(onTap: () {}),
+      bottomNavigationBar: ButtonNavigation(
+        lariId: 1,
+        onTap: () {
+          setState(() {
+            _lariData = _databaseInstance
+                .getAllLari(); // ⬅️ Refresh otomatis setelah kembali dari Running
+          });
+        },
+      ),
     );
   }
 }

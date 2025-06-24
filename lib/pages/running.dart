@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:runningfeet/database/database_instance.dart';
+import 'package:runningfeet/database/database_instance.dart'; 
 import 'dart:async';
-import 'package:tracking_run_demo/database/database_instance.dart';
 import 'package:location/location.dart';
 
 class Running extends StatefulWidget {
@@ -17,15 +16,13 @@ class _RunningState extends State<Running> {
 
   late int _lariId;
   Timer? _timer;
-  final List<LocationData?> _Location = [];
+  final List<LocationData?> _locations = []; 
 
   bool _isRunning = false;
 
-    @override
+  @override
   void initState() {
     super.initState();
-    // PERBAIKAN 2: Mengakses getter tanpa tanda kurung ()
-    _databaseInstance.database;
   }
 
   Future<LocationData?> _getCurrentLocation() async {
@@ -48,6 +45,10 @@ class _RunningState extends State<Running> {
   }
 
   void _startRunning() async {
+    setState(() {
+      _locations.clear();
+    });
+
     _lariId = await _databaseInstance.insertLari({
       'mulai': DateTime.now().toIso8601String(),
     });
@@ -64,7 +65,6 @@ class _RunningState extends State<Running> {
           _locations.add(currentLocation);
         });
 
-        // PERBAIKAN 3: Menggunakan nama method yang benar
         await _databaseInstance.insertDetailLari({
           'lari_id': _lariId,
           'latitude': currentLocation.latitude,
@@ -99,25 +99,24 @@ class _RunningState extends State<Running> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Mulai Berlari")),
+      appBar: AppBar(title: const Text("Mulai Berlari")),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsetsGeometry.all(16.0),
+          padding: const EdgeInsets.all(16.0), 
           child: Column(
-
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
                 "Selamat Berlari 🏃‍♂️",
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 30,),
+              const SizedBox(height: 30),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.redAccent,
-                  padding: EdgeInsets.symmetric(vertical: 15),
-                  textStyle: TextStyle(fontSize: 20),
+                  padding: const EdgeInsets.symmetric(vertical: 15),
+                  textStyle: const TextStyle(fontSize: 20),
                 ),
                 onPressed: () {
                   if (_isRunning) {
@@ -128,32 +127,39 @@ class _RunningState extends State<Running> {
                 },
                 child: Text(_isRunning ? "Berhenti Berlari" : "Mulai Berlari"),
               ),
-              SizedBox(height: 30),
-              Text("Riwayat Titik Lokasi",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
-              Divider(),
+              const SizedBox(height: 30),
+              const Text( 
+                "Riwayat Titik Lokasi",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              const Divider(),
               Expanded(
                 child: ListView.builder(
+                  itemCount: _locations.length, 
                   itemBuilder: (context, index) {
-                    final locationPoint = _Location[index];
+                    final locationPoint = _locations[index]; 
+
                     if (locationPoint == null) {
                       return const ListTile(title: Text("Lokasi tidak valid"));
                     }
-                return: Card(
-                  elevation: 2,
-                  margin: EdgeInsets.symmetric(vertical: 4),
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      child: Text((index = 1.toString())),
-                    ),
-                    title: Text(
-                      "lat: $locationPoint.latitude?.toStringAsFixed(6), "),
-                    subtitle: Text(
-                      "Lot: $locationPoint.longitude?.toStringAsFixed(6)"),
-                  ),
-                );
-                  }
-                  ),
+
+                    return Card(
+                      elevation: 2,
+                      margin: const EdgeInsets.symmetric(vertical: 4),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          child: Text((index + 1).toString()), 
+                        ),
+                        title: Text(
+                          "Lat: ${locationPoint.latitude?.toStringAsFixed(6) ?? 'N/A'}",
+                        ),
+                        subtitle: Text(
+                          "Lon: ${locationPoint.longitude?.toStringAsFixed(6) ?? 'N/A'}", 
+                        ),
+                      ),
+                    );
+                  },
+                ),
               )
             ],
           ),
